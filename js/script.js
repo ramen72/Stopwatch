@@ -1,4 +1,7 @@
-let minutes = 0, seconds = 0, milliseconds = 0;
+// let minutes = 0, seconds = 0, milliseconds = 0;
+let minutes = 0; 
+let seconds = 0;
+let milliseconds = 0;
 let timerInterval;
 
 const updateDisplay = () => {
@@ -7,35 +10,31 @@ const updateDisplay = () => {
   document.getElementById("milliseconds").textContent = milliseconds.toString().padStart(2, "0");
 };
 
-const startTimer = () => {
-  if (timerInterval) return; // যদি টাইমার চলছে, নতুন টাইমার শুরু না হয়।
-  timerInterval = setInterval(() => {
-    milliseconds += 1;
-    if (milliseconds === 100) {
+const startTimer = ()=>{
+  timerInterval = setInterval(()=>{
+    milliseconds ++;
+    if( milliseconds === 100 ){
       milliseconds = 0;
-      seconds += 1;
+      seconds ++;
     }
-    if (seconds === 60) {
+    if( seconds === 60 ){
       seconds = 0;
-      minutes += 1;
+      minutes++
     }
-    updateDisplay();
-  }, 10);
-};
-
-const stopTimer = () => {
-  clearInterval(timerInterval);
+    updateDisplay()
+  },10)
+}
+const stopTimer = ()=>{
+  clearInterval(timerInterval)
   timerInterval = null;
-};
-
-const resetTimer = () => {
-  stopTimer();
+}
+const resetTimer = ()=>{
+  stopTimer()
   minutes = 0;
   seconds = 0;
   milliseconds = 0;
   updateDisplay();
-};
-
-document.getElementById("start").addEventListener("click", startTimer);
-document.getElementById("stop").addEventListener("click", stopTimer);
-document.getElementById("reset").addEventListener("click", resetTimer);
+}
+document.querySelector("#start").addEventListener("click",startTimer)
+document.querySelector("#pause").addEventListener("click",stopTimer)
+document.querySelector("#reset").addEventListener("click",resetTimer)
